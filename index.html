@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SC M. SAFII POHAN </title>
+    <!-- Library Tailwind CSS untuk antarmuka profesional -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Library SheetJS untuk memproses file Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card-custom {
+            background-color: #161616;
+            border: 1px solid #2a2a2a;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #aa8a2e 100%);
+            color: #000;
+        }
+        table { width: 100%; border-collapse: collapse; }
+        th { 
+            background-color: #111111; 
+            color: #d4af37; 
+            padding: 18px; 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            border-bottom: 2px solid #222;
+        }
+        td { 
+            padding: 14px 18px; 
+            border-bottom: 1px solid #1f1f1f; 
+            font-size: 13px; 
+        }
+        .status-badge {
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .white-text {
+            color: #ffffff;
+            font-weight: 800;
+        }
+        .id-style {
+            color: #d4af37;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Header Utama -->
+        <div class="mb-12 border-b border-zinc-800 pb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-4xl font-black italic uppercase tracking-tighter">
+                    SC M.SAFII POHAN TIDAK PERNAH TUMBANG  <span class="text-yellow-600">KARNA SAYA ROBOT</span>
+                </h1>
+                <p class="text-zinc-500 text-[10px] uppercase tracking-[0.4em] mt-2 font-bold">Data Matching Engine Version 16.0 (Final Stable)</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="tombolResetData()" class="bg-red-900/30 hover:bg-red-600 text-red-500 hover:text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest border border-red-900/50 transition-all">Reset Data</button>
+                <div class="flex items-center gap-3 bg-zinc-900 px-5 py-2.5 rounded-full border border-zinc-800 shadow-xl">
+                    <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_#22c55e]"></div>
+                    <span class="text-green-500 status-badge">System Ready</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Input File -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- Box Step 1 -->
+            <div class="card-custom p-10 relative overflow-hidden border-l-4 border-red-600 shadow-2xl">
+                <h3 class="font-black text-xl mb-6 italic flex items-center gap-3">
+                    <span class="bg-red-600 text-white w-7 h-7 rounded-lg flex items-center justify-center text-sm not-italic shadow-lg">1</span>
+                    FILE XPAY
+                </h3>
+                <input type="file" id="uploadS1" class="block w-full text-sm text-zinc-500 file:mr-4 file:py-2.5 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-black file:bg-zinc-800 file:text-zinc-200 hover:file:bg-zinc-700 cursor-pointer">
+                <div id="statS1" class="mt-5 text-[10px] font-mono text-zinc-600 uppercase tracking-widest italic">Silahkan pilih file step 1...</div>
+            </div>
+
+            <!-- Box Step 2 -->
+            <div class="card-custom p-10 relative overflow-hidden border-l-4 border-yellow-600 shadow-2xl">
+                <h3 class="font-black text-xl mb-6 italic flex items-center gap-3">
+                    <span class="bg-yellow-600 text-black w-7 h-7 rounded-lg flex items-center justify-center text-sm not-italic shadow-lg">2</span>
+                    FILE ZONAMAIN
+                </h3>
+                <input type="file" id="uploadS2" class="block w-full text-sm text-zinc-500 file:mr-4 file:py-2.5 file:px-6 file:rounded-full file:border-0 file:text-sm file:font-black file:bg-zinc-800 file:text-zinc-200 hover:file:bg-zinc-700 cursor-pointer">
+                <div id="statS2" class="mt-5 text-[10px] font-mono text-zinc-600 uppercase tracking-widest italic">Silahkan pilih file step 2...</div>
+            </div>
+        </div>
+
+        <!-- Tombol Proses -->
+        <button onclick="eksekusiPencocokan()" class="w-full gold-gradient font-black py-6 rounded-3xl hover:scale-[1.01] active:scale-[0.98] transition-all uppercase tracking-[0.6em] mb-16 shadow-2xl text-lg">
+            Cocokkan Data Sekarang
+        </button>
+
+        <!-- Hasil Akhir -->
+        <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+            <div>
+                <h2 class="text-3xl font-black italic uppercase tracking-tighter">Hasil PELABUHAN <span class="text-yellow-600">(SAFII POHAN)</span></h2>
+                <p class="text-zinc-500 text-[10px] uppercase mt-2 tracking-widest font-bold">Urutan kolom dan data disesuaikan instruksi</p>
+            </div>
+            <button onclick="salinDataKeClipboard()" class="bg-zinc-800 hover:bg-zinc-700 text-white text-[11px] px-10 py-3.5 rounded-full font-black uppercase tracking-widest shadow-lg transition-all">Salin Tabel</button>
+        </div>
+
+        <!-- Tabel Output -->
+        <div class="card-custom overflow-hidden shadow-2xl border-none">
+            <div class="overflow-x-auto">
+                <table id="tabelHasilFinal">
+                    <thead>
+                        <tr>
+                            <th class="border-r border-zinc-900">TANGGAL (S1)</th>
+                            <th class="border-r border-zinc-900">BANK (S2)</th>
+                            <th class="border-r border-zinc-900 text-white bg-zinc-900/50">USER ID (S2)</th>
+                            <th class="border-r border-zinc-900 font-bold text-yellow-500">NO REK (S2)</th>
+                            <th class="border-r border-zinc-900">NAMA AKUN (S1)</th>
+                            <th class="border-r border-zinc-900">NOMINAL (S1)</th>
+                            <th>ORDER ID</th>
+                        </tr>
+                    </thead>
+                    <tbody id="badanTabelHasil" class="text-zinc-400">
+                        <tr>
+                            <td colspan="7" class="p-28 text-center text-zinc-800 italic font-black uppercase tracking-[0.2em] text-xl">Silahkan Unggah Kedua File Excel</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let globalHasilMatch = []; 
+        let dataStep1 = [];
+        let dataStep2 = [];
+
+        // FUNGSI LOAD DATA SAAT REFRESH
+        window.onload = function() {
+            const dataCache = localStorage.getItem('rekon_final_stable_v16');
+            if (dataCache) {
+                globalHasilMatch = JSON.parse(dataCache);
+                renderTabelHasil(globalHasilMatch);
+            }
+        };
+
+        // Helper: Pembersihan Header agar sangat bersih
+        function normalKey(txt) {
+            if (!txt) return "";
+            return txt.toString().toUpperCase().replace(/[^A-Z0-9]/gi, "").trim();
+        }
+
+        // Helper: Ambil Nilai dari Baris Data
+        function grabData(obj, listTarget) {
+            if (!obj) return "";
+            const keys = Object.keys(obj);
+            for (let t of listTarget) {
+                const normalTarget = normalKey(t);
+                const found = keys.find(k => normalKey(k) === normalTarget);
+                if (found) return obj[found];
+            }
+            return "";
+        }
+
+        // Fungsi Membaca Excel dengan perbaikan Header Bertingkat (Row Besar)
+        function bacaBerkas(file, tipe, callback) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                const barisRaw = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
+                
+                let idxHeader = -1;
+                for (let i = 0; i < barisRaw.length; i++) {
+                    const line = barisRaw[i].join("|").toUpperCase();
+                    if (tipe === 1) {
+                        if (line.includes("REF_ID") || line.includes("VENDOR_STATUS")) { idxHeader = i; break; }
+                    } else {
+                        if (line.includes("ORDER") || line.includes("USER") || line.includes("REK")) { idxHeader = i; break; }
+                    }
+                }
+
+                if (idxHeader === -1) {
+                    alert("Header tidak ditemukan. Pastikan file benar.");
+                    return;
+                }
+
+                // SMART HEADER MERGER: Menangani Row Besar (Bertingkat)
+                const headers = [];
+                const currentHeaderRow = barisRaw[idxHeader];
+                const prevHeaderRow = idxHeader > 0 ? barisRaw[idxHeader - 1] : [];
+
+                for (let c = 0; c < currentHeaderRow.length; c++) {
+                    let headText = currentHeaderRow[c] ? currentHeaderRow[c].toString().trim() : "";
+                    let topText = prevHeaderRow[c] ? prevHeaderRow[c].toString().trim() : "";
+                    let finalHead = (topText + " " + headText).trim();
+                    headers.push(finalHead || `COL_${c}`);
+                }
+
+                const hasil = [];
+                for (let j = idxHeader + 1; j < barisRaw.length; j++) {
+                    let obj = {};
+                    barisRaw[j].forEach((val, idx) => {
+                        if (headers[idx]) obj[headers[idx]] = val;
+                    });
+                    if (Object.values(obj).some(v => v !== "")) hasil.push(obj);
+                }
+                callback(hasil);
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        // Event listener S1 (Disbursement)
+        document.getElementById('uploadS1').addEventListener('change', function(e) {
+            if (!e.target.files[0]) return;
+            bacaBerkas(e.target.files[0], 1, function(data) {
+                dataStep1 = data.filter(item => {
+                    const status = grabData(item, ["VENDOR_STATUS", "STATUS", "REMARK"]).toString().toLowerCase();
+                    return status.includes("failed - refund");
+                });
+                document.getElementById('statS1').innerText = `✅ Terbaca: ${dataStep1.length} Data (Failed-Refund)`;
+                document.getElementById('statS1').className = "mt-5 text-[10px] font-mono text-red-500 font-bold uppercase tracking-widest";
+            });
+        });
+
+        // Event listener S2 (XPAY)
+        document.getElementById('uploadS2').addEventListener('change', function(e) {
+            if (!e.target.files[0]) return;
+            bacaBerkas(e.target.files[0], 2, function(data) {
+                dataStep2 = data;
+                document.getElementById('statS2').innerText = `✅ Terbaca: ${dataStep2.length} Baris Data XPAY`;
+                document.getElementById('statS2').className = "mt-5 text-[10px] font-mono text-yellow-500 font-bold uppercase tracking-widest";
+            });
+        });
+
+        // FUNGSI UTAMA: PROSES MATCHING
+        function eksekusiPencocokan() {
+            if (dataStep1.length === 0 || dataStep2.length === 0) {
+                alert("Mohon unggah kedua file Excel terlebih dahulu!");
+                return;
+            }
+
+            let hasilFinalMatch = [];
+            dataStep1.forEach(s1 => {
+                const id1 = grabData(s1, ["REF_ID", "ORDER", "ORDER ID"]).toString().trim().toUpperCase();
+
+                const s2Match = dataStep2.find(s2Row => {
+                    const id2 = grabData(s2Row, ["ORDER", "ORDER ID", "REF_ID", "IDS"]).toString().trim().toUpperCase();
+                    return (id1 === id2) && (id1 !== "");
+                });
+
+                if (s2Match) {
+                    hasilFinalMatch.push({
+                        tanggal: grabData(s1, ["DATE_DISBURSEMENT", "TANGGAL", "DATE"]),
+                        bank: grabData(s2Match, ["BANK", "BANKS", "NAMA BANK"]),
+                        user: grabData(s2Match, ["USER ID", "USERNAME", "USERID", "USER"]),
+                        rek: grabData(s2Match, ["NO REK", "NOREK", "ACCOUNT NO", "REKENING", "NO_REK"]),
+                        nama: grabData(s1, ["ACCOUNT_NAME", "NAMA AKUN", "NAMA"]).toString().toUpperCase(),
+                        nominal: grabData(s1, ["AMOUNT", "NOMINAL", "JUMLAH"]),
+                        order: id1
+                    });
+                }
+            });
+
+            if (hasilFinalMatch.length > 0) {
+                globalHasilMatch = hasilFinalMatch;
+                localStorage.setItem('rekon_final_stable_v16', JSON.stringify(hasilFinalMatch));
+                renderTabelHasil(hasilFinalMatch);
+                alert("Sinkronisasi Berhasil!");
+            } else {
+                alert("Tidak ada Order ID yang cocok.");
+            }
+        }
+
+        // FUNGSI RENDER KE TABEL
+        function renderTabelHasil(data) {
+            const body = document.getElementById('badanTabelHasil');
+            body.innerHTML = "";
+            
+            data.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-zinc-900/50 transition-all group";
+                tr.innerHTML = `
+                    <td class="border-r border-zinc-900 font-mono text-zinc-500">${item.tanggal}</td>
+                    <td class="border-r border-zinc-900 font-black italic text-zinc-300 tracking-widest">${item.bank.toUpperCase()}</td>
+                    <td class="border-r border-zinc-900 white-text group-hover:text-yellow-500 transition-colors">${item.user}</td>
+                    <td class="border-r border-zinc-900 font-mono font-bold text-yellow-500 bg-yellow-500/5">${item.rek}</td>
+                    <td class="border-r border-zinc-900 font-bold text-zinc-100">${item.nama}</td>
+                    <td class="border-r border-zinc-900 font-black text-red-500">${item.nominal}</td>
+                    <td class="id-style p-4 select-all">${item.order}</td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+
+        // RESET
+        function tombolResetData() {
+            if (confirm("Reset seluruh data rekonsiliasi?")) {
+                localStorage.removeItem('rekon_final_stable_v16');
+                location.reload();
+            }
+        }
+
+        // FUNGSI COPY DATA ONLY (TANPA HEADER)
+        function salinDataKeClipboard() {
+            if (globalHasilMatch.length === 0) {
+                alert("Tidak ada data untuk disalin.");
+                return;
+            }
+
+            // Langsung masuk ke data tanpa menambahkan baris judul (header)
+            let textKopi = "";
+
+            // Isi data sesuai urutan kolom yang diminta
+            globalHasilMatch.forEach((item, index) => {
+                textKopi += `${item.bank}\t${item.user}\t${item.rek}\t${item.nama}\t${item.nominal}`;
+                // Tambahkan baris baru kecuali di baris terakhir
+                if (index < globalHasilMatch.length - 1) {
+                    textKopi += "\n";
+                }
+            });
+
+            // Proses menyalin ke clipboard
+            const el = document.createElement('textarea');
+            el.value = textKopi;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            alert("Data Berhasil Disalin (Hanya Isi Data)!");
+        }
+    </script>
+</body>
+</html>
